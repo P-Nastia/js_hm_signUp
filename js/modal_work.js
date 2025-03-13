@@ -13,20 +13,25 @@ const rightRotate = document.getElementById('rightRotate');
 
 leftRotate.onclick = function (e) {
     if (cropper) {
-        cropper.rotate(45);
+        cropper.rotate(90);
     }
 }
 rightRotate.onclick = function (e) {
     if (cropper) {
-        cropper.rotate(-45);
+        cropper.rotate(-90);
     }
 }
 
+//js - вміє сам по id шукати елеенти - автоматично
 chooseBT.onclick = function (e) {
 
     avatar = document.getElementById('avatar');
-    
+
+    console.log("Chose image", avatar.src);
     image.src = avatar.src;
+    if (cropper)
+        cropper.destroy();
+
     cropper = new Cropper(image, {
         aspectRatio: 1,
         viewMode: 1
@@ -55,9 +60,10 @@ uploadImage.onchange = (event) => {
                 aspectRatio: 1,
                 viewMode: 1
             });
+            uploadImage.value = "";
         }
         else {
-            window.alert('Please choose an image file.');
+            //window.alert('Please choose an image file.');
         }
     }
 }
@@ -65,25 +71,26 @@ uploadImage.onchange = (event) => {
 saveImage.onclick = function (e) {
     if (cropper) {
 
-        cropper.getCroppedCanvas().toBlob(function (blob) {
-            file_blob = new File([blob], "some_random_name.jpg");
+        var base64 = cropper.getCroppedCanvas().toDataURL();
 
-            if (uploadImageURL) {
-                URL.revokeObjectURL(uploadImageURL);
-            }
-            avatar.src = uploadImageURL = URL.createObjectURL(file_blob);
+        avatar.src = uploadImageURL = base64;
+        //cropper.getCroppedCanvas().toBlob(function (blob) {
+        //    file_blob = new File([blob], "some_random_name.jpg");
 
-            cropper = cropper.destroy();
+        //    if (uploadImageURL) {
+        //        URL.revokeObjectURL(uploadImageURL);
+        //    }
+        //    avatar.src = uploadImageURL = URL.createObjectURL(file_blob);
         
-        });
+        //});
     }
 }
 
 cancel.onclick = function (e) {
-    image.src = avatar.src;
-    if (cropper) {
-        cropper = cropper.destroy();
-    }
+    //image.src = avatar.src;
+    //if (cropper) {
+    //    cropper = cropper.destroy();
+    //}
     //image.src = avatar.src;
    
     //    cropper = cropper.destroy();
