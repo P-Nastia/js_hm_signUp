@@ -1,6 +1,5 @@
 ﻿let cropper;
 let uploadImageURL;
-var file_blob;
 var image = document.getElementById('image');
 let avatar;
 
@@ -8,7 +7,6 @@ var uploadImage = document.getElementById('uploadImage');
 
 const leftRotate = document.getElementById('leftRotate');
 const rightRotate = document.getElementById('rightRotate');
-
 
 
 leftRotate.onclick = function (e) {
@@ -62,9 +60,6 @@ uploadImage.onchange = (event) => {
             });
             uploadImage.value = "";
         }
-        else {
-            //window.alert('Please choose an image file.');
-        }
     }
 }
 
@@ -74,29 +69,6 @@ saveImage.onclick = function (e) {
         var base64 = cropper.getCroppedCanvas().toDataURL();
 
         avatar.src = uploadImageURL = base64;
-        //cropper.getCroppedCanvas().toBlob(function (blob) {
-        //    file_blob = new File([blob], "some_random_name.jpg");
-
-        //    if (uploadImageURL) {
-        //        URL.revokeObjectURL(uploadImageURL);
-        //    }
-        //    avatar.src = uploadImageURL = URL.createObjectURL(file_blob);
         
-        //});
     }
-}
-
-cancel.onclick = function (e) {
-    //image.src = avatar.src;
-    //if (cropper) {
-    //    cropper = cropper.destroy();
-    //}
-    //image.src = avatar.src;
-   
-    //    cropper = cropper.destroy();
-    
-    //cropper = new Cropper(image, {
-    //    aspectRatio: 1,
-    //    viewMode: 1
-    //});
 }
