@@ -18,8 +18,7 @@ formRegister.onsubmit = (e) => {
     let items = [...oldItems, formData];
     let json = JSON.stringify(items);
 
-    //localStorage.users = json; // запис масиву в localStorage
-    localStorage.setItem("users", json);// інший спосіб (безпечніший)
+    localStorage.setItem("users", json);
     console.log("json", json);
     let users = localStorage.getItem("users");
     console.log("json", users);
